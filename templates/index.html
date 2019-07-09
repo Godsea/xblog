@@ -1,0 +1,97 @@
+{% load staticfiles%}
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/foundation/5.5.3/css/foundation.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/foundation/5.5.3/js/foundation.min.js"></script>
+    <script src="https://cdn.staticfile.org/foundation/5.5.3/js/vendor/modernizr.js"></script>
+    <link rel="stylesheet" href="{% static 'code.css' %}">
+    <link rel="stylesheet" href="http://static.runoob.com/assets/foundation-icons/foundation-icons.css">
+    <title>个人学习分享-运维博客</title>
+
+</head>
+<body style="background-color: #fff;">
+<div class="fixed" style="background-color: #96b97d;">
+<nav class="top-bar row" data-topbar style="background-color: #96b97d">
+  <ul class="title-area">
+      <!-- 小屏幕上折叠按钮: 去掉 .menu-icon 类，可以去除图标。
+      如果需要只显示图片，可以删除 "Menu" 文本 -->
+    <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+  </ul>
+  <section class="top-bar-section">
+    <ul class="">
+      <li><a href="" style="background-color: #96b97d">首页</a></li>
+        {% for nav in navigation %}
+            <li><a href="/{{ nav.id }}/" style="background-color: #96b97d">{{ nav.name }}</a></li>
+        {% endfor %}
+    </ul>
+      <ul class="right">
+      <li><a href="/admin/" style="background-color: #96b97d">登录</a></li>
+    </ul>
+  </section>
+</nav>
+    </div>
+<div class="ros">
+  <div class="medium-3 columns">
+      <div class="medium-5 columns left">
+          <div style="padding:0;">
+              <h6 style="text-align: center;background-color: #96b97d;">项目</h6>
+              <div class="panel" style="padding: 0;">
+                  <ul class="side-nav" style="padding:4px;">
+                      {% for con in contents %}
+                        <li style="margin-bottom: 0;"><a href="/{{ con.nav.id }}/{{ con.id }}/1/" style="padding-bottom: 4px;padding-top: 4px;">{{ con.name }}</a></li>
+                      {% endfor %}
+                  </ul>
+              </div>
+          </div>
+      </div>
+      <div class="medium-7 columns right">
+          <div style="padding:0;">
+              <h6 style="text-align: center;background-color: #96b97d;">目录导航</h6>
+              <div class="panel" style="padding: 0;">
+                  <ul class="side-nav" style="padding:4px;">
+                  {% for ty in types %}
+                      <li style="margin-bottom: 0;"><span href="#" style="padding-bottom: 0px;padding-top: 0px;">{{ ty.name }}</span></li>
+                      {% for a in blogs %}
+                          {% if a.ty == ty.id %}
+                              <li style="padding-left: 25px;margin-bottom: 1px;"><a href="/{{ a.nav }}/{{ a.con }}/{{ a.id }}/" style="padding-top: 0;padding-bottom: 0;padding-left: 0px;border-left:3px solid #888888;"> &nbsp;&nbsp;{{ a.name }}</a></li>
+                          {% endif %}
+                      {% endfor %}
+                  {% endfor %}
+                  </ul>
+              </div>
+          </div>
+      </div>
+  </div>
+  <div class="medium-6 columns"  style="padding-top: 20px;">
+      <div style="padding:0;" data-alert class="alert-box secondary"><a href="https://promotion.aliyun.com/ntms/act/qwbk.html?userCode=chgmk0se" target="_blank"><img src="{% static '1000-60.png' %}" alt="Paris"></a><a href="#" class="close" style="padding: 0;margin: 0;top: 5px;">&times;</a></div>
+    <div class="panel">
+        {{ blog.content|safe }}
+    </div>
+  </div>
+  <div class="medium-3 columns" >
+      <div class="medium-6 columns left">
+          <ul class="side-nav">
+              <li><a href="#" style="padding: 0;">热门文章</a></li>
+              <li><a href="#" style="padding: 0;">受访统计</a></li>
+              <li><a href="#" style="padding: 0;">联系我们</a></li>
+              <li><a href="#" style="padding: 0;">Link 4</a></li>
+          </ul>
+      </div>
+  </div>
+</div>
+<div class="medium-12 columns text-center" style="color: #888888;font-size:12px;">
+     Copyright © 2014-2019    <strong><a href="//www.runoob.com/" target="_blank">运维博客</a></strong>&nbsp;
+    <strong><a href="//www.xianglin.xyz/" target="_blank">xianglin.xyz</a></strong> All Rights Reserved. 备案号：豫ICP备17016596号-1
+</div>
+<script>
+$(document).ready(function() {
+    $(document).foundation();
+})
+</script>
+
+</body>
+</html>
